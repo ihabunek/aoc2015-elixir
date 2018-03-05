@@ -6,16 +6,28 @@ defmodule Day05 do
         char in [?a, ?e, ?i, ?o, ?u]
     end
 
+    defp count_vowels(string) do
+        string |> to_charlist |> Enum.filter(&is_vowel?/1) |> Enum.count
+    end
+
     defp has_three_vowels(string) do
-        string |> to_charlist |> Enum.filter(&is_vowel?/1) |> Enum.count >= 3
+        count_vowels(string) >= 3
     end
 
     defp letter_appears_twice(string) do
+        Regex.match?(~r/([a-z])\1/, string)
+    end
 
+    defp blacklist(string) do
+        not Regex.match?(~r/(ab|cd|pq|xy)/, string)
     end
 
     def part1(input) do
-        input |> Enum.filter(&has_three_vowels/1)
+        input
+            |> Enum.filter(&has_three_vowels/1)
+            |> Enum.filter(&letter_appears_twice/1)
+            |> Enum.filter(&blacklist/1)
+            |> Enum.count
     end
 
     def part2(input) do
@@ -23,12 +35,6 @@ defmodule Day05 do
 end
 
 input = File.read!("day05.in") |> String.split
-
-input = [
-    "aaa",
-    "abc",
-    "aabde",
-]
 
 Day05.part1(input) |> IO.inspect
 Day05.part2(input) |> IO.inspect
