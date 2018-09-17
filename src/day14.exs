@@ -25,8 +25,18 @@ defmodule Day14 do
               |> Enum.sort
     end
 
-    def part2(input) do
-        input
+    def part2(input, total_time) do
+        Enum.reduce(0..total_time, %{}, fn duration, acc ->
+            results = input |> Enum.map(&(distance_traveled(&1, duration)))
+            best_distance = results |> Enum.map(fn {distance, _} -> distance end)
+                                    |> Enum.max
+            winners = results |> Enum.filter(fn {distance, _} -> distance == best_distance end)
+                              |> Enum.map(fn {_, name} -> name end)
+
+            Enum.reduce(winners, acc, fn winner, acc ->
+                Map.update(acc, winner, 0, &(&1 + 1))
+            end)
+        end)
     end
 end
 
@@ -34,7 +44,9 @@ end
 #     {"Comet", 14, 10, 127},
 #     {"Dancer", 16, 11, 162},
 # ]
+
 # Day14.part1(example_input, 1000) |> IO.inspect
+# Day14.part2(example_input, 1000) |> IO.inspect(limit: :infinity)
 
 
 # Can't be bothered with regex
@@ -51,4 +63,4 @@ input = [
 ]
 
 Day14.part1(input, 2503) |> IO.inspect
-# Day14.part2(input) |> IO.inspect
+Day14.part2(input, 2503) |> IO.inspect
