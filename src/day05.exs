@@ -22,6 +22,14 @@ defmodule Day05 do
         not Regex.match?(~r/(ab|cd|pq|xy)/, string)
     end
 
+    defp letter_pair_appears_twice(string) do
+        Regex.match?(~r/([a-z]{2}).*\1/, string)
+    end
+
+    defp letter_repeats_with_divider(string) do
+        Regex.match?(~r/([a-z]).\1/, string)
+    end
+
     def part1(input) do
         input
             |> Enum.filter(&has_three_vowels/1)
@@ -31,6 +39,10 @@ defmodule Day05 do
     end
 
     def part2(input) do
+        input
+            |> Enum.filter(&letter_pair_appears_twice/1)
+            |> Enum.filter(&letter_repeats_with_divider/1)
+            |> Enum.count
     end
 end
 
