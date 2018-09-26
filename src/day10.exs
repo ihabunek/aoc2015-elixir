@@ -12,7 +12,7 @@ defmodule Day10 do
 
     def look_and_say_regex(input) do
         # Split string into groups of consecutive identical digits
-        Regex.scan(~r/1+|2+|3+|4+|5+|6+|7+|8+|9+|0+/, input) 
+        Regex.scan(~r/1+|2+|3+|4+|5+|6+|7+|8+|9+|0+/, input)
             |> Enum.map(&process_regex_match/1)
             |> Enum.join
     end
@@ -24,9 +24,9 @@ defmodule Day10 do
     end
 
     def look_and_say(input) do
-        input |> String.split("", trim: true) 
-              |> Enum.chunk_by(fn x -> x end) 
-              |> Enum.map(&process_chunk/1) 
+        input |> String.split("", trim: true)
+              |> Enum.chunk_by(fn x -> x end)
+              |> Enum.map(&process_chunk/1)
               |> Enum.join
     end
 
@@ -40,7 +40,7 @@ defmodule Day10 do
     def repeat(fun, input, count) do
         repeat(fun, fun.(input), count - 1)
     end
-    
+
     # --- run -----------------------------------------------------------------
 
     def part1(input) do
@@ -54,5 +54,5 @@ end
 
 input = "1113222113"
 
-Day10.part1(input) |> IO.inspect
-Day10.part2(input) |> IO.inspect
+Day10.part1(input) |> IO.inspect  # 2.6s
+# Day10.part2(input) |> IO.inspect

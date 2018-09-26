@@ -1,5 +1,5 @@
 # Day 19: Medicine for Rudolph
-# https://adventofcode.com/2019/day/19
+# https://adventofcode.com/2015/day/19
 
 defmodule Day19 do
   def parse_combinations(combinations) do
@@ -91,7 +91,6 @@ defmodule Day19 do
   end
 end
 
-# input = File.read!("day19.example.in")
 input = File.read!("day19.in")
 
 Day19.part1(input) |> IO.inspect
