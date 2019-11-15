@@ -1,0 +1,50 @@
+a = b = 0
+
+    /-- 00 jio a, +22        \ if a != 1: (i.e. a == 0)
+    |   01 inc a             |     a = 20895
+    |   02 tpl a             |
+    |   03 tpl a             |
+    |   04 tpl a             |
+    |   05 inc a             |
+    |   06 tpl a             |
+    |   07 inc a             |
+    |   08 tpl a             |
+    |   09 inc a             |
+    |   10 inc a             |
+    |   11 tpl a             |
+    |   12 inc a             |
+    |   13 inc a             |
+    |   14 tpl a             |
+    |   15 inc a             |
+    |   16 inc a             |
+    |   17 tpl a             |
+    |   18 inc a             |
+    |   19 inc a             |
+    |   20 tpl a             |
+    |   21 jmp +19           /
+    \-> 22 tpl a             \ else:
+        23 tpl a             |     a = 60975
+        24 tpl a             |
+        25 tpl a             |
+        26 inc a             |
+        27 inc a             |
+        28 tpl a             |
+        29 inc a             |
+        30 tpl a             |
+        31 inc a             |
+        32 inc a             |
+        33 tpl a             |
+        34 inc a             |
+        35 inc a             |
+        36 tpl a             |
+        37 inc a             |
+        38 tpl a             |
+        39 tpl a             /
+  /-/-> 40 jio a, +8         \ while a != 1: END
+  | |   41 inc b             |   b++
+  | |   42 jie a, +4         |   if a is even: a = a / 2
+  | |   43 tpl a             |   else: a = (a * 3) + 1
+  | |   44 inc a             |
+  | \-- 45 jmp +2            |
+  |     46 hlf a             |
+  \---- 47 jmp -7            /
